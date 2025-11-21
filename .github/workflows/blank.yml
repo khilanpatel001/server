@@ -1,0 +1,87 @@
+@echo off
+echo ==========================================
+echo SETTING UP ENGINEERING REPOSITORY...
+echo ==========================================
+
+:: 1. Create the Main Directory
+mkdir Engineering_Repo
+cd Engineering_Repo
+
+:: 2. Initialize Git
+git init
+echo Git Initialized...
+
+:: 3. Create Folder Structure & Add Placeholders
+:: Git ignores empty folders, so we add a hidden .gitkeep file to each
+
+echo Creating 01_PRODUCT_DESIGN...
+mkdir "01_PRODUCT_DESIGN\New_Designs"
+mkdir "01_PRODUCT_DESIGN\Design_Revisions"
+mkdir "01_PRODUCT_DESIGN\CAD_Files"
+mkdir "01_PRODUCT_DESIGN\Simulation_Files"
+mkdir "01_PRODUCT_DESIGN\Prototype_Designs"
+
+echo Creating 02_DRAWINGS...
+mkdir "02_DRAWINGS\Mechanical_Drawings"
+mkdir "02_DRAWINGS\Electrical_Drawings"
+mkdir "02_DRAWINGS\PnID_Diagrams"
+mkdir "02_DRAWINGS\Layout_Drawings"
+mkdir "02_DRAWINGS\Approved_Drawings"
+
+echo Creating 03_PROJECTS...
+mkdir "03_PROJECTS\Project_Wise_Folders"
+mkdir "03_PROJECTS\Closed_Projects"
+
+echo Creating 04_BOM_AND_SPECIFICATIONS...
+mkdir "04_BOM_AND_SPECIFICATIONS\BOM"
+mkdir "04_BOM_AND_SPECIFICATIONS\Technical_Specifications"
+mkdir "04_BOM_AND_SPECIFICATIONS\Material_List"
+mkdir "04_BOM_AND_SPECIFICATIONS\Revision_Control"
+
+echo Creating 05_CHANGE_MANAGEMENT...
+mkdir "05_CHANGE_MANAGEMENT\ECO"
+mkdir "05_CHANGE_MANAGEMENT\ECR"
+mkdir "05_CHANGE_MANAGEMENT\NCR"
+mkdir "05_CHANGE_MANAGEMENT\Approvals"
+
+echo Creating 06_TECHNICAL_DOCUMENTS...
+mkdir "06_TECHNICAL_DOCUMENTS\Manuals"
+mkdir "06_TECHNICAL_DOCUMENTS\Work_Instructions"
+mkdir "06_TECHNICAL_DOCUMENTS\CAD_Standards"
+mkdir "06_TECHNICAL_DOCUMENTS\SOPs"
+
+echo Creating 07_STANDARDS_AND_REFERENCE...
+mkdir "07_STANDARDS_AND_REFERENCE\ISO_Standards"
+mkdir "07_STANDARDS_AND_REFERENCE\Internal_Standards"
+mkdir "07_STANDARDS_AND_REFERENCE\Industry_Standards"
+mkdir "07_STANDARDS_AND_REFERENCE\Guidelines"
+
+echo Creating 08_SUPPLIER_ENGINEERING...
+mkdir "08_SUPPLIER_ENGINEERING\Supplier_Drawings"
+mkdir "08_SUPPLIER_ENGINEERING\Specifications"
+mkdir "08_SUPPLIER_ENGINEERING\Approvals"
+
+echo Creating 09_QUALITY_AND_TESTING...
+mkdir "09_QUALITY_AND_TESTING\Test_Reports"
+mkdir "09_QUALITY_AND_TESTING\Inspection_Data"
+mkdir "09_QUALITY_AND_TESTING\Validation_Reports"
+mkdir "09_QUALITY_AND_TESTING\Calibration_Data"
+
+echo Creating 10_ENGINEERING_ADMIN...
+mkdir "10_ENGINEERING_ADMIN\Team_Documents"
+mkdir "10_ENGINEERING_ADMIN\Training_Material"
+mkdir "10_ENGINEERING_ADMIN\Meeting_Minutes"
+mkdir "10_ENGINEERING_ADMIN\Drafts"
+
+echo Creating 11_ARCHIVE...
+mkdir "11_ARCHIVE\V1_Old_Designs"
+mkdir "11_ARCHIVE\Closed_Projects"
+mkdir "11_ARCHIVE\Obsolete_Drawings"
+
+:: 4. Create a placeholder file in every folder so Git tracks them
+for /r %%d in (.) do if not exist "%%d\.gitkeep" type nul > "%%d\.gitkeep"
+
+:: 5. Setup Git LFS (Large File Storage) for CAD
+echo Setting up Large File Support...
+call git lfs install
+call git lfs track "*.sldprt" "*.sldasm" "*.step" "*.stp" "*.dwg" "*.dxf" "*.ipt" "*.iam" "*.pdf" "*.doc" "*.docx" "*.sim"
